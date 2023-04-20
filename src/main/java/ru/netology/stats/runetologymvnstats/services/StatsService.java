@@ -13,13 +13,9 @@ public class StatsService {
     }
 
     public double averageSale(long[] sales) {
-        double averageSale = 0;
+        long sum = sum(sales);
         double length = sales.length;
-        int i = 0;
-        for (long sale : sales) {
-            averageSale = averageSale + (sales[i] / length);
-            i++;
-        }
+        double averageSale = sum / length;
         return averageSale;
     }
 
@@ -37,54 +33,40 @@ public class StatsService {
 
     public int minSales(long[] sales) {
         int minMonth = 0;
-        int month = 0; // переменная для индекса рассматриваемого месяца в массиве
+        int month = 0;
         for (long sale : sales) {
-            // sales[minMonth] - продажи в месяце minMonth
-            // sale - продажи в рассматриваемом месяце
             if (sale <= sales[minMonth]) {
                 minMonth = month;
             }
-            month = month + 1; // следующий рассматриваемый месяц имеет номер на 1 больше
+            month = month + 1;
         }
         return minMonth + 1;
     }
 
     public int lowSales(long[] sales) {
         double length = sales.length;
-        double averageSale = 0;
+        double averageSale = averageSale(sales);
         int lowMonths = 0;
         int i = 0;
-        int x = 0;
         for (long sale : sales) {
-            averageSale = averageSale + (sales[i] / length);
-            i++;
-        }
-
-        for (long sale : sales) {
-            if (sales[x] < averageSale) {
+            if (sales[i] < averageSale) {
                 lowMonths++;
             }
-            x++;
+            i++;
         }
         return lowMonths;
     }
 
     public int highSales(long[] sales) {
         double length = sales.length;
-        double averageSale = 0;
+        double averageSale = averageSale(sales);
         int highMonths = 0;
         int i = 0;
-        int x = 0;
         for (long sale : sales) {
-            averageSale = averageSale + (sales[i] / length);
-            i++;
-        }
-
-        for (long sale : sales) {
-            if (sales[x] > averageSale) {
+            if (sales[i] > averageSale) {
                 highMonths++;
             }
-            x++;
+            i++;
         }
         return highMonths;
     }
